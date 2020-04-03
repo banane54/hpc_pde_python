@@ -3,22 +3,23 @@ This project is part of the bachelor project of Gary Folli. This is an HPC PDE s
 
 This application is used to teach parallel and distributed computing.
 
-Basic usage: `mpirun -np <num_proc> python3 main.py <nx> <ny> <nt> <t>`
+**Basic usage:** `mpirun -np <num_proc> python3 main.py <nx> <ny> <nt> <t>`
 
-Paramters:
-`nx` = number of gridpoints in x-directions (horizontally)
-`ny` = number of gridpoints in y-direction (vertically)
-`nt` = number of timesteps
-`t` = total time
-`-v` = (optional) turn on verbose output
-`-io` = (optional) enable interactive output (python graphs) of the solution
-`-po` = (optional) enable printed output (png image) of the solution generated in current directory
-`-pm` = (optional) print the final solution (matrix) to a text file (.txt) in current directory
-`-d d` = (optional) d parameters (float)
-`-r r` = (optional) r parameters (float)
-`-ic ic` = (optional) points with initial diffusion values for manually specify the intial condition of the model
+## Parameters:
 
-## Example
+* `nx` = number of gridpoints in x-directions (horizontally)
+* `ny` = number of gridpoints in y-direction (vertically)
+* `nt` = number of timesteps
+* `t` = total time
+* `-v` = (optional) turn on verbose output
+* `-io` = (optional) enable interactive output (python graphs) of the solution
+* `-po` = (optional) enable printed output (png image) of the solution generated in current directory
+* `-pm` = (optional) print the final solution (matrix) to a text file (.txt) in current directory
+* `-d d` = (optional) d parameters (float)
+* `-r r` = (optional) r parameters (float)
+* `-ic ic` = (optional) points with initial diffusion values for manually specify the intial condition of the model
+
+## Examples
 
 Here are commands showing the usage of the mini-app. Just copy and paste them to see the result ! (Try also these commands with a higher number of processor)
 
