@@ -32,21 +32,21 @@ mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po
 mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po -pm
 mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po -pm -d 1.5
 mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po -pm -d 1.0 -r 1250.0
-mpirun -np 4 python3 main.py 256 256 100 0.01 -v -io -po -pm -d 1.0 -r 1100.0 -ic [50,50,1.0/200,200,0.1]```
+mpirun -np 4 python3 main.py 256 256 100 0.01 -v -io -po -pm -d 1.0 -r 1100.0 -ic [50,50,1.0/200,200,0.1]
 ```
 
 Equivalent commands than the one from the slides with the interactive ouput:
 
 ```mpirun -np 4 python3 main.py 128 128 100 0.0025 -v -io
 mpirun -np 4 python3 main.py 128 128 100 0.005 -v -io
-mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io```
+mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io
 ```
 
 Please be aware that the optional parameters can be entered in any order you like and any of them that you want !! 
 The following examples are perfectly valid command: 
 ```mpirun -np 4 python3 main.py 128 128 100 0.01 -pm
 mpirun -np 4 python3 main.py 128 128 100 0.01 -r 1250.0
-mpirun -np 4 python3 main.py 228 228 150 0.005 -v -ic [30,30,0.1/196,196,0.1/115,115,0.2] -io```
+mpirun -np 4 python3 main.py 228 228 150 0.005 -v -ic [30,30,0.1/196,196,0.1/115,115,0.2] -io
 ```
 
 
