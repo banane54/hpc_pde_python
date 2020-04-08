@@ -226,7 +226,6 @@ def main(argv):
         
         for i in data.discretization.points:
 
-            print(i)
             x = i[0]
             y = i[1]
             s = i[2]

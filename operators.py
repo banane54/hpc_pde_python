@@ -34,8 +34,7 @@ def diffusion(U, S, t, tt):
         num_requests += 1
 
         # pack north buffer
-        for i in range(0, nx):
-            data.buffN[0][i] = U[ny-1][i]
+        data.buffN[0, :] = U[ny-1, :]
 
         requests[num_requests] = comm_cart.Isend([data.buffN, MPI.DOUBLE], domain.neighbour_north, domain.rank)
         num_requests += 1
@@ -48,8 +47,7 @@ def diffusion(U, S, t, tt):
         num_requests += 1
 
         # pack south buffer
-        for i in range(0, nx):
-            data.buffS[0][i] = U[0][i]
+        data.buffS[0, :] = U[0, :]
 
         requests[num_requests] = comm_cart.Isend([data.buffS, MPI.DOUBLE], domain.neighbour_south, domain.rank)  
         num_requests += 1
@@ -62,8 +60,7 @@ def diffusion(U, S, t, tt):
         num_requests += 1
 
         # pack east buffer
-        for j in range(0, ny):
-            data.buffE[0][j] = U[j][nx-1]
+        data.buffE[0, :] = U[:, nx-1]
     
         requests[num_requests] = comm_cart.Isend([data.buffE, MPI.DOUBLE], domain.neighbour_east, domain.rank)  
         num_requests += 1
@@ -76,8 +73,7 @@ def diffusion(U, S, t, tt):
         num_requests += 1
 
         # pack west buffer
-        for j in range(0, ny):
-            data.buffW[0][j] = U[j][0]
+        data.buffW[0, :] = U[:, 0]
 
         requests[num_requests] = comm_cart.Isend([data.buffW, MPI.DOUBLE], domain.neighbour_west, domain.rank) 
         num_requests += 1

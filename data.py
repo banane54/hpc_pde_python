@@ -56,15 +56,15 @@ class SubDomain:
 
     # generate dimensions of the cartesian plan given a number of processors
     def create_dim(self, size):
-        sqrt_size = math.sqrt(size)
-        
-        if size == int(sqrt_size) ** 2:
-            return [int(sqrt_size), int(sqrt_size)]
-        else:
-            s = size
-            while s%2 == 0:
-                s = s // 2
-            return [s, size // s]
+        dividers = []
+        for i in range(size - 1 , 0, -1):
+            if (size%i == 0 and i != 1):
+                dividers.append(i)
+        if (dividers == []):
+            return [size, 1]
+        else: 
+            divider = dividers[len(dividers) // 2]
+            return [size // divider, divider]
     
     # constructor and init function
     def __init__(self, rank, size, discretization, communicator):
@@ -129,7 +129,7 @@ class SubDomain:
     def print(self):
         for i in range(0, self.size):
             if i == self.rank:  
-                print("Rank " + str(self.rank) + "/" + str(self.size))
+                print("Rank " + str(self.rank) + "/" + str(self.size-1))
                 print("At index (" + str(self.domy-1) + "," + str(self.domx-1) + ")")
                 print("Neigh N:S " + str(self.neighbour_north) + ":" + str(self.neighbour_south))
                 print("Neigh E:W " + str(self.neighbour_east) + ":" + str(self.neighbour_west))
