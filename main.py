@@ -230,10 +230,10 @@ def main(argv):
             y = i[1]
             s = i[2]
             
-            if (x >= (domain.startx - 1) and x <= (domain.endx - 1)
-                and y >= (domain.starty - 1) and y <= (domain.endy - 1)):
-                x -= (domain.startx - 1)
-                y -= (domain.starty - 1)
+            if (x >= (domain.startx) and x <= (domain.endx)
+                and y >= (domain.starty) and y <= (domain.endy)):
+                x -= (domain.startx)
+                y -= (domain.starty)
 
                 data.x_new[y, x] = s
 
@@ -249,13 +249,13 @@ def main(argv):
         radius = min(xc, yc) / 2.0 
         
         # Startx and starty begins artificially to count from 1 but it is actually 0
-        for j in range(domain.starty-1, domain.endy):
+        for j in range(domain.starty, domain.endy + 1):
             
             # (j - 1) displace the circle slightly on the upper right of the domain
             # instead of being in the corner
             y = (j) * discretization.dx
             
-            for i in range(domain.startx-1, domain.endx):
+            for i in range(domain.startx, domain.endx + 1):
                 
                 # (i - 1) displace the circle slightly on the upper right of the domain
                 # instead of being in the corner
@@ -264,7 +264,7 @@ def main(argv):
                 # Test if grid point is inside circle
                 # Actually the circle only lies in the (0, 0) domain
                 if ((x - xc) * (x - xc) + (y - yc) * (y - yc)) < (radius * radius):
-                    data.x_new[j - domain.starty + 1][i - domain.startx + 1] = 0.1
+                    data.x_new[j - domain.starty][i - domain.startx] = 0.1
 
     # Start time before solving the system
     start_time = time.time()
@@ -487,7 +487,7 @@ def write_binary(filename, x, domain, discretization):
     
     file_handle = MPI.File.Open(domain.comm_cart, filename + ".bin", MPI.MODE_CREATE | MPI.MODE_WRONLY, MPI.INFO_NULL)
     
-    ustart = [domain.startx-1, domain.starty-1]
+    ustart = [domain.startx, domain.starty]
     ucount = [domain.nx, domain.ny]
     dimuids = [discretization.nx, discretization.ny]
 

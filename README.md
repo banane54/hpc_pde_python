@@ -32,7 +32,7 @@ mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po
 mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po -pm
 mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po -pm -d 1.5
 mpirun -np 4 python3 main.py 128 128 100 0.01 -v -io -po -pm -d 1.0 -r 1250.0
-mpirun -np 4 python3 main.py 256 256 100 0.01 -v -io -po -pm -d 1.0 -r 1100.0 -ic [50,50,1.0/200,200,0.1]
+mpirun -np 4 python3 main.py 256 256 100 0.01 -v -io -po -pm -d 1.0 -r 1100.0 -ic [50,50,0.6/206,206,0.6]
 ```
 
 Equivalent commands than the one from the slides with the interactive ouput:

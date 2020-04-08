@@ -84,9 +84,9 @@ class SubDomain:
         # get coordinates of the current processor on the newly generated cartesian plan
         coords = self.comm_cart.Get_coords(rank)
         
-        # coordinates of each subdomain (counting from 1)
-        self.domy = coords[0] + 1 # (int)
-        self.domx = coords[1] + 1 # (int)
+        # coordinates of each subdomain
+        self.domy = coords[0] # (int)
+        self.domx = coords[1] # (int)
     
         # Column direction is 0 (y-direction)
         south_north = self.comm_cart.Shift(0, 1) # tuple
@@ -100,19 +100,19 @@ class SubDomain:
         self.neighbour_east = west_east[1] # (int)
 
         # x and y dimension in grid points of the sub-domain
-        self.nx = discretization.nx // self.ndomx # (int)
-        self.ny = discretization.ny // self.ndomy # (int)
+        self.nx = discretization.nx // (self.ndomx) # (int)
+        self.ny = discretization.ny // (self.ndomy) # (int)
 
         # the starting coordinates in the grid of the current subdomain
-        self.startx = (self.domx - 1) * self.nx + 1 # (int)
-        self.starty = (self.domy - 1) * self.ny + 1 # (int)
+        self.startx = self.domx * self.nx # (int)
+        self.starty = self.domy * self.ny # (int)
 
         # adjust for grid dimensions that, potentially, 
         # do not divided evenly between the sub-domains
-        if self.domx == self.ndomx:
-            self.nx = discretization.nx - self.startx + 1
-        if self.domy == self.ndomy:
-            self.ny = discretization.ny - self.starty + 1
+        if self.domx == (self.ndomx - 1):
+            self.nx = discretization.nx - self.startx
+        if self.domy == (self.ndomy - 1):
+            self.ny = discretization.ny - self.starty
         
         # the ending coordinates in the grid of the current subdomain
         self.endx = self.startx + self.nx - 1 # (int)
@@ -129,10 +129,12 @@ class SubDomain:
     def print(self):
         for i in range(0, self.size):
             if i == self.rank:  
-                print("Rank " + str(self.rank) + "/" + str(self.size-1))
-                print("At index (" + str(self.domy-1) + "," + str(self.domx-1) + ")")
+                print("Rank " + str(self.rank) + "/" + str(self.size))
+                print("At index (" + str(self.domy) + "," + str(self.domx) + ")")
                 print("Neigh N:S " + str(self.neighbour_north) + ":" + str(self.neighbour_south))
                 print("Neigh E:W " + str(self.neighbour_east) + ":" + str(self.neighbour_west))
+                print("Startx:endx  " + str(self.startx) + ":" + str(self.endx))
+                print("Starty:endy  " + str(self.starty) + ":" + str(self.endy))
                 print("Local dims " + str(self.nx) + " x " + str(self.ny))
                 print("")
             
