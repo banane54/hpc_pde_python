@@ -2,7 +2,7 @@ from mpi4py import MPI
 import time
 import math
 
-# It is very important to understand that each processor (subdomain)
+# It is very important to understand that each process (subdomain)
 # has it's own version of all these variables below
 # -----------------------------------------------
 # statistics
@@ -32,7 +32,7 @@ buffS = 0 # 1d
 buffW = 0 # 1d
 # -----------------------------------------------
 # data structures (python object)
-# discretization keeps the informations of the full grids
+# discretization keeps the informations of the full grid
 # domain keeps the per domain informations (dimensions, coordinates in the cartesian plan...)
 domain = None 
 discretization = None
@@ -139,7 +139,6 @@ class SubDomain:
                 print("")
             
             MPI.COMM_WORLD.Barrier()
-            
             # for the welcome output to not be polluated
             time.sleep(0.1)
 

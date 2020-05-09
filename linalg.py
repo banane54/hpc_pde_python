@@ -78,16 +78,13 @@ def cg_solver(x, b, maxiters, tol, success):
     if not cg_initialized: 
         cg_init(nx,ny)
     
-    # tolerance
-    eps = 1.e-8
-    # used for the derivative (Jacobian and Ap)
-    eps_inv = 1. / eps
-
     xold[:] = x
 
-    # compute Ax, the Jacobian
-    # by computing the derivative using the difference
-    # between two points on the grid having an epsilon difference
+    # matrix free Conjugate Gradient
+    # the Ax is approximated using a matrix-vector product
+    # the Jacobian does not need to be explicitly calculated
+    eps = 1.e-8
+    eps_inv = 1. / eps
     operators.diffusion(x, Fxold, 0, 0)
     v = x * (1.0 + eps)
     operators.diffusion(v, Fx, 0, 0)
@@ -110,14 +107,9 @@ def cg_solver(x, b, maxiters, tol, success):
     for iteration in range(0, maxiters): # maxiters
 
         # Ap = A*p
-        # eps * p => p is the variable which decides for the size of the move
-        # p is big, the gradient does a big step
-        # v is then a vector pointing in the solution
+        # Ap is approximated using a matrix vector product
+        # the Jacobian does not need to be explicitly calculated
         v = 1.0 * xold + eps * p
-        # because A is a jacobian, we have to look into the
-        # direction of v from xold and then getting 
-        # the gradient between v and xold
-        # which is obtained with the derivative below
         operators.diffusion(v, Fx, 0, 0)
         Ap = eps_inv * (Fx - Fxold)
 
