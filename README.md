@@ -63,5 +63,5 @@ The Jupyter notebooks can be run on the CSCS supercomputer or any Jupyter enviro
 6. You are all set! You can now run the cluster using the command: `ipcluster start -n 4 --profile=mpi`. This command will run a cluster of 4 processes. 
 7. Once the cluster is running, before running Jupyter Lab, you have to enable the cluster functionality in it with the command:</br>`ipcluster nbextension enable`.  
 8. You can now run Jupyter lab in parallel with the ipcluster and execute the cells. Be just careful to change the client command in the cell initializing Ipyparallel:</br>
-`rc = Client(profile='mpi')`
+`rc = ipp.Client(profile='mpi')`
 
