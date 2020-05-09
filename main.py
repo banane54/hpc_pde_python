@@ -338,7 +338,7 @@ def main(argv):
     time.sleep(0.2)
 
     # final results printed
-    if(domain.rank == 0):
+    if(domain.rank == 0 or domain.rank == 1):
         print("--------------------------------------------------------------------------------")
         print("Simulation took " + str(timespent) + " seconds")
         print(str(data.iters_cg) + " conjugate gradient iterations, at rate of " + str(data.iters_cg/timespent) + " iters/second")
@@ -454,7 +454,7 @@ def plot_solution(solution):
     plt.contour(solution, 12, colors='black', linewidths=0.1)
     cbar = plt.colorbar(graph)
     cbar.set_label('Diffusion value')
-    plt.title('Contour plot of solution')       
+    plt.title('Contour plot of the solution')       
         
 
 # plot interactively the graph of convergence
