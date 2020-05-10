@@ -338,7 +338,7 @@ def main(argv):
     time.sleep(0.2)
 
     # final results printed
-    if(domain.rank == 0 or domain.rank == 1):
+    if(domain.rank == 0):
         print("--------------------------------------------------------------------------------")
         print("Simulation took " + str(timespent) + " seconds")
         print(str(data.iters_cg) + " conjugate gradient iterations, at rate of " + str(data.iters_cg/timespent) + " iters/second")
@@ -370,8 +370,9 @@ def main(argv):
         if data.interactive_output and domain.rank == 0:
             print("(Close the python interactive windows to stop the program.)")
             plot_solution(result)
-            plot_all_residual(res, discretization)
-            # plot_convergence(con)
+            plot_convergence(con)
+            # plot_all_residual(res, discretization)
+            
             
 # merged the resulting matrix from all subdomains to the root processor 0
 # reconstitution of the full solution
@@ -453,8 +454,10 @@ def plot_solution(solution):
     graph = plt.contourf(solution, 12, alpha=.75, cmap='jet')
     plt.contour(solution, 12, colors='black', linewidths=0.1)
     cbar = plt.colorbar(graph)
-    cbar.set_label('Diffusion value')
-    plt.title('Contour plot of the solution')       
+    cbar.set_label('s value')
+    plt.ylabel('Grid points on Y-axis')
+    plt.xlabel('Grid points on X-axis')
+    plt.title('Contour plot of the solution')        
         
 
 # plot interactively the graph of convergence
@@ -465,8 +468,8 @@ def plot_convergence(con):
     plt.subplot(1, 2, 2)
     plt.plot(x_values, con)
     plt.ylabel('Residual')
-    plt.xlabel('Newton iteration')
-    plt.title('Convergence of last timestep for rank 0')
+    plt.xlabel('Newton\'s iterations')
+    plt.title('Convergence of last timestep for rank 0 for Newton\'s method')
     plt.show()
 
 # plot interactively the graph of the final convergence for each timestep
@@ -526,8 +529,10 @@ def read_binary(filename, domain, discretization):
         graph = plt.contourf(data, 12, alpha=.75, cmap='jet')
         plt.contour(data, 12, colors='black', linewidths=0.1)
         cbar = plt.colorbar(graph)
-        cbar.set_label('Diffusion value')
-        plt.title('Contour plot of solution')
+        cbar.set_label('s value')
+        plt.ylabel('Grid points on Y-axis')
+        plt.xlabel('Grid points on X-axis')
+        plt.title('Contour plot of the solution')  
         plt.savefig("./" + filename + ".png")
 
 main(sys.argv)
